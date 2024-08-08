@@ -1,13 +1,13 @@
 #!/bin/bash
-apt update
-echo "install dotnet"
-apt install -y aspnetcore-runtime-6.0
-apt install -y dotnet-sdk-6.0
+sudoapt update
+sudo echo "install dotnet"
+sudo apt install -y aspnetcore-runtime-8.0
+sudo apt install -y dotnet-sdk-8.0
 
 #install git
-echo "install git"
-apt install git
-apt install unzip
+sudo echo "install git"
+sudo apt install git
+sudo apt install unzip
 
 #install aws cli
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
@@ -16,24 +16,24 @@ unzip -qq awscliv2.zip
 aws --version
 
 #configure git
-sudo -u ubuntu git config --global credential.helper '!aws codecommit credential-helper $@'
-sudo -u ubuntu git config --global credential.UseHttpPath true
+sudo sudo -u ubuntu git config --global credential.helper '!aws codecommit credential-helper $@'
+sudo sudo -u ubuntu git config --global credential.UseHttpPath true
 
 
 #clone repo from code commit
 cd /home/ubuntu
 echo "git clone"
-sudo -u ubuntu git clone https://git-codecommit.eu-north-1.amazonaws.com/v1/repos/srv-02
+sudo -u ubuntu git clone https://github.com/hamedahmed100/srv-02.git
 cd srv-02
 
 #build the dot net service
 echo "dotnet build"
-echo 'DOTNET_CLI_HOME=/temp' >> /etc/environment
+echo 'DOTNET_CLI_HOME=/temp' | sudo tee -a /etc/environment
 export DOTNET_CLI_HOME=/temp
-dotnet publish -c Release --self-contained=false --runtime linux-x64
+sudo dotnet publish -c Release --self-contained=false --runtime linux-x64
 
 
-cat >/etc/systemd/system/srv-02.service <<EOL
+sudo tee /etc/systemd/system/srv-02.service > /dev/null <<EOL
 [Unit]
 Description=Dotnet S3 info service
 
@@ -47,7 +47,12 @@ Environment=DOTNET_CLI_HOME=/temp
 WantedBy=multi-user.target
 EOL
 
-systemctl daemon-reload
+sudo systemctl daemon-reload
 
 #run it
-systemctl start srv-02
+sudo systemctl start srv-02
+
+# Check the service status
+sudo systemctl status srv-02
+# Check the service logs
+sudo journalctl -u srv-02

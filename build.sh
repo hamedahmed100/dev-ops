@@ -38,7 +38,7 @@ sudo tee /etc/systemd/system/srv-02.service > /dev/null <<EOL
 Description=Dotnet S3 info service
 
 [Service]
-ExecStart=/usr/bin/dotnet /home/ubuntu/srv-02/bin/Release/netcoreapp6/linux-x64/srv02.dll
+ExecStart=/usr/bin/dotnet /home/ubuntu/srv-02/bin/Release/net8.0/linux-x64/srv02.dll
 SyslogIdentifier=srv-02
 
 Environment=DOTNET_CLI_HOME=/temp

@@ -18,7 +18,7 @@ class Program
         };
 
         var listener = new HttpListener();
-        listener.Prefixes.Add(string.Format("https://*:8002/"));
+        listener.Prefixes.Add(string.Format("http://*:8002/"));
         listener.Start();
 
         try

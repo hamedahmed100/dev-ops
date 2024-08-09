@@ -10,7 +10,7 @@ TG_ARN=$(aws elbv2 create-target-group --name devops-tg --protocol HTTP --port 8
 echo "$TG_ARN"
 
 
-aws elbv2 register-targets --target-group-arn $TG_ARN --targets Id=i-i-05733685010b18a79 Id=i-02301517b11d5d7c2
+aws elbv2 register-targets --target-group-arn $TG_ARN --targets Id=i-05733685010b18a79 Id=i-02301517b11d5d7c2
 
 
 LS_ARN=$(aws elbv2 create-listener --load-balancer-arn $LB_ARN --protocol HTTP --port 8002  --default-actions Type=forward,TargetGroupArn=$TG_ARN | grep -oP '(?<="ListenerArn": ")[^"]*')

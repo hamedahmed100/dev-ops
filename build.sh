@@ -55,4 +55,4 @@ sudo systemctl start srv-02
 # Check the service status
 sudo systemctl status srv-02
 # Check the service logs
-sudo journalctl -u srv-02
+sudo journalctl -f -u srv-02

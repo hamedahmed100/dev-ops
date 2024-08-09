@@ -1,5 +1,5 @@
 #!/bin/bash
-LB_ARN=$(aws elbv2 create-load-balancer --name devops-alb --type application --subnets subnet-027476f8818e209e5 subnet-027476f8818e209e5 --security-groups sg-0048235aeef4fcb10 | grep -oP '(?<="LoadBalancerArn": ")[^"]*' )
+LB_ARN=$(aws elbv2 create-load-balancer --name devops-alb --type application --subnets subnet-027476f8818e209e5 subnet-0f5edd2932a9d5809  --security-groups sg-0048235aeef4fcb10 | grep -oP '(?<="LoadBalancerArn": ")[^"]*' )
 
 
 echo "$LB_ARN"

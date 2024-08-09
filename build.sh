@@ -1,5 +1,5 @@
 #!/bin/bash
-sudoapt update
+sudo apt update
 sudo echo "install dotnet"
 sudo apt install -y aspnetcore-runtime-8.0
 sudo apt install -y dotnet-sdk-8.0
